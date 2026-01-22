@@ -12,8 +12,8 @@ export enum ToneType {
 }
 export type LanguageType =
   | "English"
-  | "Русский"
-  | "Белорусский"
+  | "Russian"
+  | "Belarusian"
   | "Deutsch"
   | "Español"
   | "Français"

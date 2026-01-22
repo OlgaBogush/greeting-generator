@@ -11,11 +11,17 @@ function App() {
   const [tone, setTone] = useState<ToneType>(ToneType.FRIENDLY)
   const [language, setLanguage] = useState<LanguageType>("English")
   const [generatedText, setGeneratedText] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleGenerate = async (): Promise<void> => {
     if (!name.trim()) {
+      setError("Please, enter the name.")
       return
     }
+    setError(null)
+    setIsLoading(true)
+    setGeneratedText("")
     try {
       const result = await generateGreeting(
         occasion,
@@ -26,8 +32,10 @@ function App() {
         language
       )
       setGeneratedText(result)
-    } catch (error) {
-      console.error()
+    } catch (error: any) {
+      setError(error.message || "An error has occurred.")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -41,6 +49,7 @@ function App() {
       <h3>{tone}</h3>
       <h3>{language}</h3>
       <h2>{generatedText}</h2>
+      <h3>{error}</h3>
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
@@ -96,7 +105,9 @@ function App() {
             ))}
           </select>
           <hr />
-          <button onClick={handleGenerate}>Create Magic</button>
+          <button onClick={handleGenerate} disabled={isLoading}>
+            Create Magic
+          </button>
         </div>
       </main>
     </div>

@@ -2,8 +2,8 @@ import type { LanguageType } from "./types"
 
 export const LANGUAGES: LanguageType[] = [
   "English",
-  "Русский",
-  "Белорусский",
+  "Russian",
+  "Belarusian",
   "Deutsch",
   "Español",
   "Français",
