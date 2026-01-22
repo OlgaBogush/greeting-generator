@@ -1,11 +1,13 @@
 import { useState } from "react"
+import { Cake, Snowflake } from "lucide-react"
+
 import { OccasionType, ToneType, type LanguageType } from "./types"
 import { LANGUAGES } from "./constants"
 import { generateGreeting } from "./services/geminiService"
 import Header from "./components/Header"
 import Title from "./components/Title"
 import OccasionButton from "./components/OccasionButton"
-import { Cake, Snowflake } from "lucide-react"
+import UserDetailsSection from "./components/UserDetailsSection"
 
 function App() {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -46,21 +48,12 @@ function App() {
   return (
     <div className="min-h-screen bg-[#FAF5FF]">
       <Header />
-
-      {/* <h3>{occasion}</h3>
-      <h3>{name}</h3>
-      <h3>{age}</h3>
-      <h3>{interests}</h3>
-      <h3>{tone}</h3>
-      <h3>{language}</h3>
-      <h3>{error}</h3>
-      <h2>{generatedText}</h2> */}
-
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
           <Title />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            <div className="lg:col-span-5 spase-y-10">
+            {/* left */}
+            <div className="lg:col-span-5 sm:space-y-10 space-y-8">
               <section className="space-y-4">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -85,32 +78,22 @@ function App() {
                   />
                 </div>
               </section>
+              <UserDetailsSection
+                name={name}
+                age={age}
+                error={error}
+                interests={interests}
+                setName={setName}
+                setAge={setAge}
+                setError={setError}
+                setInterests={setInterests}
+              />
             </div>
+            {/* right */}
             <div className="lg:col-span-7 h-full">2</div>
           </div>
 
-          <br />
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Paul"
-          />
-          <br />
-          <input
-            type="text"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            placeholder="25"
-          />
-          <br />
-          <textarea
-            value={interests}
-            rows={2}
-            onChange={(e) => setInterests(e.target.value)}
-            placeholder="codding, dogs"
-          />
-          <br />
+          {/* 
           {Object.values(ToneType).map((item) => {
             return (
               <button
@@ -137,7 +120,7 @@ function App() {
           <hr />
           <button onClick={handleGenerate} disabled={isLoading}>
             Create Magic
-          </button>
+          </button> */}
         </div>
       </main>
     </div>
