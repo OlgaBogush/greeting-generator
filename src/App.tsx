@@ -9,6 +9,7 @@ import OccasionButton from "./components/OccasionButton"
 import UserDetailsSection from "./components/UserDetailsSection"
 import ExtraDetailsSection from "./components/ExtraDetailsSection"
 import GenerateButton from "./components/GenerateButton"
+import ResultSection from "./components/ResultSection"
 
 function App() {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -96,18 +97,20 @@ function App() {
                 setTone={setTone}
                 selectedTone={tone}
               />
+              <GenerateButton onClick={handleGenerate} isLoading={isLoading}>
+                <Sparkles
+                  className={`w-5 h-5 ${
+                    isLoading ? "animate-spin" : "group-hover:animate-pulse"
+                  }`}
+                />
+                {isLoading ? "Creating..." : "Generate"}
+              </GenerateButton>
             </div>
             {/* right */}
-            <div className="lg:col-span-7 h-full">{generatedText}</div>
+            <div className="lg:col-span-7 h-full">
+              <ResultSection content={generatedText} isLoading={isLoading} />
+            </div>
           </div>
-          <GenerateButton onClick={handleGenerate} isLoading={isLoading}>
-            <Sparkles
-              className={`w-5 h-5 ${
-                isLoading ? "animate-spin" : "group-hover:animate-pulse"
-              }`}
-            />
-            {isLoading ? "Creating..." : "Generate"}
-          </GenerateButton>
         </div>
       </main>
     </div>
