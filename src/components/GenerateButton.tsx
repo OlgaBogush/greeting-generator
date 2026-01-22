@@ -20,7 +20,7 @@ const GenerateButton: FC<IGenerateButtonProps> = ({
     ${
       isLoading
         ? "bg-purple-400 cursor-not-allowed"
-        : "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 hover:scale-[1.02] active:scale-[0.98]"
+        : "bg-linear-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 hover:scale-[1.02] active:scale-[0.98]"
     }
 `}
     >
