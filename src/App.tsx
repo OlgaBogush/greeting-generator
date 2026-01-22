@@ -2,6 +2,10 @@ import { useState } from "react"
 import { OccasionType, ToneType, type LanguageType } from "./types"
 import { LANGUAGES } from "./constants"
 import { generateGreeting } from "./services/geminiService"
+import Header from "./components/Header"
+import Title from "./components/Title"
+import OccasionButton from "./components/OccasionButton"
+import { Cake, Snowflake } from "lucide-react"
 
 function App() {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -41,24 +45,50 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#FAF5FF]">
-      <header>Greeting Generator</header>
-      <h3>{occasion}</h3>
+      <Header />
+
+      {/* <h3>{occasion}</h3>
       <h3>{name}</h3>
       <h3>{age}</h3>
       <h3>{interests}</h3>
       <h3>{tone}</h3>
       <h3>{language}</h3>
-      <h2>{generatedText}</h2>
       <h3>{error}</h3>
+      <h2>{generatedText}</h2> */}
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
-          <button onClick={() => setOccasion(OccasionType.BIRTHDAY)}>
-            Birthday
-          </button>
-          <button onClick={() => setOccasion(OccasionType.NEW_YEAR)}>
-            New Year
-          </button>
+          <Title />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <div className="lg:col-span-5 spase-y-10">
+              <section className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-900 text-white text-xs">
+                      1
+                    </span>
+                    Choose a holiday
+                  </h3>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <OccasionButton
+                    customClick={() => setOccasion(OccasionType.BIRTHDAY)}
+                    selected={occasion === OccasionType.BIRTHDAY}
+                    title={OccasionType.BIRTHDAY}
+                    icon={Cake}
+                  />
+                  <OccasionButton
+                    customClick={() => setOccasion(OccasionType.NEW_YEAR)}
+                    selected={occasion === OccasionType.NEW_YEAR}
+                    title={OccasionType.NEW_YEAR}
+                    icon={Snowflake}
+                  />
+                </div>
+              </section>
+            </div>
+            <div className="lg:col-span-7 h-full">2</div>
+          </div>
+
           <br />
           <input
             type="text"
