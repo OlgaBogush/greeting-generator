@@ -1,13 +1,14 @@
 import { useState } from "react"
-import { Cake, Snowflake } from "lucide-react"
+import { Cake, Snowflake, Sparkles } from "lucide-react"
 
 import { OccasionType, ToneType, type LanguageType } from "./types"
-import { LANGUAGES } from "./constants"
 import { generateGreeting } from "./services/geminiService"
 import Header from "./components/Header"
 import Title from "./components/Title"
 import OccasionButton from "./components/OccasionButton"
 import UserDetailsSection from "./components/UserDetailsSection"
+import ExtraDetailsSection from "./components/ExtraDetailsSection"
+import GenerateButton from "./components/GenerateButton"
 
 function App() {
   const [occasion, setOccasion] = useState<OccasionType>(OccasionType.BIRTHDAY)
@@ -88,39 +89,25 @@ function App() {
                 setError={setError}
                 setInterests={setInterests}
               />
+              <ExtraDetailsSection
+                language={language}
+                setLanguage={setLanguage}
+                error={error}
+                setTone={setTone}
+                selectedTone={tone}
+              />
             </div>
             {/* right */}
-            <div className="lg:col-span-7 h-full">2</div>
+            <div className="lg:col-span-7 h-full">{generatedText}</div>
           </div>
-
-          {/* 
-          {Object.values(ToneType).map((item) => {
-            return (
-              <button
-                onClick={() => {
-                  setTone(item)
-                }}
-                key={item}
-              >
-                {item}
-              </button>
-            )
-          })}
-          <br />
-          <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value as LanguageType)}
-          >
-            {LANGUAGES.map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-          <hr />
-          <button onClick={handleGenerate} disabled={isLoading}>
-            Create Magic
-          </button> */}
+          <GenerateButton onClick={handleGenerate} isLoading={isLoading}>
+            <Sparkles
+              className={`w-5 h-5 ${
+                isLoading ? "animate-spin" : "group-hover:animate-pulse"
+              }`}
+            />
+            {isLoading ? "Creating..." : "Generate"}
+          </GenerateButton>
         </div>
       </main>
     </div>
